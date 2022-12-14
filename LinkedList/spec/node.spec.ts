@@ -29,6 +29,11 @@ describe('MyNumberNode', () => {
     
     expect(node42.getNext()).toBeNull
   })
+  it('set new value', () => {
+    const nodeA = new MyNumberNode(1);
+    nodeA.setValue(42);
+    expect(nodeA.getValue()).toBe(42)
+  })
   it('reset link', () => {
     const node42 = new MyNumberNode(42);
     const node21 = new MyNumberNode(21, node42);
