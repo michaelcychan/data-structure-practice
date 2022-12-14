@@ -92,4 +92,47 @@ describe('MyNumberLinkedList', () => {
       expect(myList.stringifyList()).toBe("")
     })
   })
+  describe('reverseIndex', () => {
+    it('returns value counting from end of tail', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(17)
+      myList.addNewHead(4)
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+
+      expect(myList.reverseIndex(2)).toBe(32)
+    })
+    it('returns value counting from end of tail', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(17)
+      myList.addNewHead(4)
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+
+      expect(myList.reverseIndex(1)).toBe(55)
+    })
+    it('returns null if length of Linked List shorter than reverse index', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(17)
+      myList.addNewHead(4)
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+      expect(myList.reverseIndex(5)).toBe(null)
+    })
+    it('returns first node if length of Linked List equals reverse index', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(17)
+      myList.addNewHead(4)
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+
+      expect(myList.reverseIndex(4)).toBe(4)
+    })
+    it('returns null for empty list', () => {
+      const myList = new MyNumLinkedList()
+      expect(myList.stringifyList()).toBe("")
+
+      expect(myList.reverseIndex(4)).toBe(null)
+    })
+  })
 })

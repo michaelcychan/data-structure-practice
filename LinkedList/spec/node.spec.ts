@@ -5,14 +5,14 @@ describe('MyNumberNode', () => {
     const node3 = new MyNumberNode(3);
 
     expect(node3.getValue()).toBe(3);
-    expect(node3.getNext()).toBeNull;
+    expect(node3.getNext()).toBe(null);
   })
   it('links two nodes', () => {
     const node42 = new MyNumberNode(42);
     const node3 = new MyNumberNode(3, node42);
 
     expect(node3.getNext()).toBe(node42)
-    expect(node42.getNext()).toBeNull
+    expect(node42.getNext()).toBe(null)
   })
   it('links three nodes', () => {
     const node42 = new MyNumberNode(42);
@@ -24,10 +24,10 @@ describe('MyNumberNode', () => {
     if (after3 != null) {
       expect(after3.getNext()).toBe(node42)
     } else {
-      expect(after3).not.toBeNull
+      expect(after3).toBeTruthy()
     }
     
-    expect(node42.getNext()).toBeNull
+    expect(node42.getNext()).toBe(null)
   })
   it('set new value', () => {
     const nodeA = new MyNumberNode(1);
@@ -44,9 +44,9 @@ describe('MyNumberNode', () => {
     if (after3 != null) {
       expect(after3.getNext()).toBe(node42)
     } else {
-      expect(after3).not.toBeNull
+      expect(after3).toBeTruthy()
     }
-    expect(node42.getNext()).toBeNull
+    expect(node42.getNext()).toBe(null)
 
     node3.setNext(node42);
     expect(node3.getNext()).toBe(node42)

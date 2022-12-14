@@ -1,12 +1,12 @@
 import {MyNumberNode} from './node'
 import {NodeType} from './node'
 
-type initValueType = number | null
+type ValueType = number | null
 
 export class MyNumLinkedList {
   #head: NodeType
 
-  constructor(value:initValueType = null) {
+  constructor(value:ValueType = null) {
     if (value != null) {
       this.#head = new MyNumberNode(value)
     } else {
@@ -66,6 +66,33 @@ export class MyNumLinkedList {
         console.error(`target: ${value} not found, nothing was removed`)
         break
       }
+    }
+  }
+
+  reverseIndex(fromLast:number):ValueType {
+    let tailPointer = this.getHead();
+    let targetPointer = this.getHead();
+    const head = this.getHead()
+    let counter = 0;
+    while (tailPointer) {
+      tailPointer = tailPointer.getNext()
+      counter += 1
+      if (fromLast < counter ) {
+        if (targetPointer) {
+          targetPointer = targetPointer.getNext()
+        }
+      }
+    }
+    if (counter == fromLast && head) {
+      return head.getValue()
+    } else if (counter < fromLast) {
+      return null
+    }
+    if (targetPointer) {
+      console.log(targetPointer.getValue())
+      return targetPointer.getValue()
+    } else {
+      return null
     }
   }
   
