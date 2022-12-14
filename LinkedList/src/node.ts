@@ -1,10 +1,10 @@
-type nextNode = MyNumberNode | null
+export type NodeType = MyNumberNode | null
 
 export class MyNumberNode {
   #value: number;
-  #next: nextNode
+  #next: NodeType
 
-  constructor(value:number, next:nextNode = null){
+  constructor(value:number, next:NodeType = null){
     this.#value = value;
     this.#next = next;
   }
@@ -17,11 +17,11 @@ export class MyNumberNode {
     this.#value = newValue;
   }
 
-  getNext(): nextNode{
+  getNext(): NodeType{
     return this.#next;
   }
 
-  setNext(next: nextNode){
+  setNext(next: NodeType){
     this.#next = next;
   }
 }
