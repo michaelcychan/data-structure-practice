@@ -18,7 +18,7 @@ export class MyNumLinkedList {
     return this.#head
   }
 
-  setNewHead(newValue: number) {
+  addNewHead(newValue: number) {
     const newNode = new MyNumberNode(newValue)
     if (this.#head != null) {
       newNode.setNext(this.#head)
@@ -29,17 +29,45 @@ export class MyNumLinkedList {
   stringifyList(){
     let current: NodeType = this.getHead()
     let outputString = ""
-    while (current != null) {
-      outputString = outputString + current.getValue().toString()
+    while (current) {
+      outputString += current.getValue().toString()
       const nextNode = current.getNext()
       if (nextNode) {
-        outputString = outputString + "-"
+        outputString += "-"
       }
       current = nextNode
     }
     return outputString
   }
 
+  setNewHead(newNode: NodeType) {
+    this.#head = newNode
+  }
+
+  removeNode(value:number) {
+    let current: NodeType = this.getHead()
+    if (current) {
+      if (current.getValue() === value) {
+        this.setNewHead(current.getNext())
+        return
+      }
+    }
+    while (current) {
+      const nextNode = current.getNext()
+
+      if (nextNode) {
+        if (nextNode.getValue() === value) {
+          current.setNext(nextNode.getNext())
+          break
+        } else {
+          current = current.getNext()
+        }
+      } else {
+        console.error(`target: ${value} not found, nothing was removed`)
+        break
+      }
+    }
+  }
   
   
 }
