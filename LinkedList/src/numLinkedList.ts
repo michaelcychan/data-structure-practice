@@ -44,6 +44,16 @@ export class MyNumLinkedList {
     this.#head = newNode
   }
 
+  length():number {
+    let counter = 0
+    let pointer = this.#head
+    while (pointer) {
+      counter += 1
+      pointer = pointer.getNext()
+    }
+    return counter
+  }
+
   removeNode(value:number) {
     let current: NodeType = this.getHead()
     if (current) {
@@ -51,6 +61,8 @@ export class MyNumLinkedList {
         this.setNewHead(current.getNext())
         return
       }
+    } else {
+      console.error("List is empty, nothing is removed")
     }
     while (current) {
       const nextNode = current.getNext()
@@ -90,9 +102,8 @@ export class MyNumLinkedList {
     }
     if (targetPointer) {
       return targetPointer.getValue()
-    } else {
-      return null
     }
+    return null
   }
 
   swapping(a:number , b: number) {
@@ -124,19 +135,49 @@ export class MyNumLinkedList {
       }
     }
 
-    if (currentA && currentB && prevA && prevB) {
+    if (currentA && currentB) {
       
       // cannot reverse order, will cause ciruclar link
       const tempA = currentA
-      prevA.setNext(currentB)
-      prevB.setNext(tempA)
+      if (prevA) {
+        prevA.setNext(currentB)
+      } else {
+        this.setNewHead(currentB)
+      }
+      if (prevB) {
+        prevB.setNext(tempA)
+      } else {
+        this.setNewHead(currentA)
+      }
       
       const tempNextA = currentA.getNext()
       currentA.setNext(currentB.getNext())
       currentB.setNext(tempNextA)
       
     } else {
-      console.log("something is not present")
+      console.error("Error: target node not found")
+    } 
+  }
+
+  findMid() {
+    let rabbit = this.getHead()
+    let tortoise = this.getHead()
+    if (rabbit) {
+      while (rabbit && tortoise) {
+        const rabbitNext = rabbit.getNext()
+        if (rabbitNext && tortoise) {
+          rabbit = rabbitNext.getNext()
+          tortoise = tortoise.getNext()
+        } else {
+          return tortoise.getValue()
+        }
+      }
+      if (tortoise) {
+        return tortoise.getValue()
+      }
+      
+    } else {
+      return null
     }
   }
 }

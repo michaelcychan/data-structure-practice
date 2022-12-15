@@ -81,14 +81,18 @@ describe('MyNumberLinkedList', () => {
       myList.addNewHead(4)
       expect(myList.stringifyList()).toBe("4-17-32-55")
 
+      jest.spyOn(global.console, 'error')
       myList.removeNode(1)
+      expect(console.error).toBeCalled()
       expect(myList.stringifyList()).toBe("4-17-32-55")
     })
     it('removes an non-existing from an empty list', () => {
       const myList = new MyNumLinkedList()
       expect(myList.stringifyList()).toBe("")
 
+      jest.spyOn(global.console, 'error')
       myList.removeNode(1)
+      expect(console.error).toBeCalled()
       expect(myList.stringifyList()).toBe("")
     })
   })
@@ -156,7 +160,7 @@ describe('MyNumberLinkedList', () => {
       myList.swapping(17, 55)
       expect(myList.stringifyList()).toBe("4-55-32-17")
     })
-    xit('swaps two exisitng nodes including head', () => {
+    it('swaps two exisitng nodes including head', () => {
       const myList = new MyNumLinkedList(55)
       myList.addNewHead(32)
       myList.addNewHead(17)
@@ -165,6 +169,72 @@ describe('MyNumberLinkedList', () => {
 
       myList.swapping(4, 32)
       expect(myList.stringifyList()).toBe("32-17-4-55")
+    })
+    it('swaps two exisitng nodes including head (case 2)', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(17)
+      myList.addNewHead(4)
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+
+      myList.swapping(32, 4)
+      expect(myList.stringifyList()).toBe("32-17-4-55")
+    })
+    it('swaps with one non-existing node', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(17)
+      myList.addNewHead(4)
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+
+      jest.spyOn(global.console, 'error')
+      
+      myList.swapping(33, 4)
+      expect(console.error).toBeCalled()
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+    })
+  })
+  describe('findMid', () => {
+    it('returns null for empty list', () => {
+      const myList = new MyNumLinkedList()
+
+      expect(myList.findMid()).toBe(null)
+    })
+    it('returns head for single node list', () => {
+      const myList = new MyNumLinkedList(55)
+      expect(myList.findMid()).toBe(55)
+    })
+    it('returns middle for odd number nodes', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(5)
+
+      expect(myList.findMid()).toBe(32)
+    })
+    it('returns middle node to the tail for even number nodes', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(23)
+      myList.addNewHead(5)
+
+      expect(myList.findMid()).toBe(32)
+    })
+  })
+  describe('length', () => {
+    it('returns 0 for empty list', () => {
+      const myList = new MyNumLinkedList()
+      expect(myList.length()).toBe(0)
+    })
+    it('returns 1 for a single node list', () => {
+      const myList = new MyNumLinkedList(47)
+      expect(myList.length()).toBe(1)
+    })
+    it('returns 1 for a single node list', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(23)
+      myList.addNewHead(5)
+      expect(myList.length()).toBe(4)
     })
   })
 })
