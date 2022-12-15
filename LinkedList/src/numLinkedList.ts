@@ -89,12 +89,54 @@ export class MyNumLinkedList {
       return null
     }
     if (targetPointer) {
-      console.log(targetPointer.getValue())
       return targetPointer.getValue()
     } else {
       return null
     }
   }
-  
-  
+
+  swapping(a:number , b: number) {
+    let currentA = this.getHead()
+    let currentB = this.getHead()
+
+    let prevA: NodeType = null;
+    let prevB: NodeType = null;
+
+    while (currentA) {
+      if (currentA) {
+        if (currentA.getValue() === a) {
+          break
+        } else {
+          prevA = currentA
+          currentA = currentA.getNext()
+        }
+      }
+    }
+
+    while (currentB) {
+      if (currentB) {
+        if (currentB.getValue() === b) {
+          break
+        } else {
+          prevB = currentB
+          currentB = currentB.getNext()
+        }
+      }
+    }
+
+    if (currentA && currentB && prevA && prevB) {
+      
+      // cannot reverse order, will cause ciruclar link
+      const tempA = currentA
+      prevA.setNext(currentB)
+      prevB.setNext(tempA)
+      
+      const tempNextA = currentA.getNext()
+      currentA.setNext(currentB.getNext())
+      currentB.setNext(tempNextA)
+      
+    } else {
+      console.log("something is not present")
+    }
+  }
 }

@@ -135,4 +135,36 @@ describe('MyNumberLinkedList', () => {
       expect(myList.reverseIndex(4)).toBe(null)
     })
   })
+  describe("swapping", () => {
+    it('swaps two exisitng nodes', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(17)
+      myList.addNewHead(4)
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+
+      myList.swapping(17, 32)
+      expect(myList.stringifyList()).toBe("4-32-17-55")
+    })
+    it('swaps two exisitng nodes including tail', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(17)
+      myList.addNewHead(4)
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+
+      myList.swapping(17, 55)
+      expect(myList.stringifyList()).toBe("4-55-32-17")
+    })
+    xit('swaps two exisitng nodes including head', () => {
+      const myList = new MyNumLinkedList(55)
+      myList.addNewHead(32)
+      myList.addNewHead(17)
+      myList.addNewHead(4)
+      expect(myList.stringifyList()).toBe("4-17-32-55")
+
+      myList.swapping(4, 32)
+      expect(myList.stringifyList()).toBe("32-17-4-55")
+    })
+  })
 })
