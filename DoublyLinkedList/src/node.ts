@@ -1,12 +1,11 @@
-type ValueType = number | null
-type NodeType = MyTwoWayNode | null
+export type NodeType = MyTwoWayNode | null
 
 export class MyTwoWayNode {
-  #value: ValueType
+  #value: number
   #nextNode: NodeType
   #prevNode: NodeType
   
-  constructor(value: ValueType = null) {
+  constructor(value: number) {
     this.#value = value
     this.#nextNode = null
     this.#prevNode = null
