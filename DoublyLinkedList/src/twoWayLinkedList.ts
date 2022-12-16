@@ -54,9 +54,16 @@ export class TwoWayLinkedList {
 
   }
 
-
-  addTail() {
-
+  addTail(value:number) {
+    const newTail = new MyTwoWayNode(value);
+    newTail.setPrev(this.#tail)
+    if (this.#tail) {
+      this.#tail.setNext(newTail)
+    }
+    this.#tail = newTail
+    if (!this.#head) {
+      this.#head = newTail
+    }
   }
 
   length():number {
