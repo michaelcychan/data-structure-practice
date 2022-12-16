@@ -75,4 +75,40 @@ export class TwoWayLinkedList {
     }
     return counter;
   }
+
+  removeHead():NodeType {
+    if (this.#head) {
+      const nodeRemoval = this.#head
+      const newHead = this.#head.getNext()
+      this.#head = newHead
+      if (newHead) {
+        newHead.setPrev(null)
+      }
+      if (nodeRemoval === this.#tail) {
+        this.#tail = null
+      }
+      return nodeRemoval
+    }
+    return null
+  }
+
+  removeTail():NodeType{
+    if (this.#tail) {
+      const nodeRemoval = this.#tail
+      const newTail = this.#tail.getPrev()
+      this.#tail = newTail
+      if (newTail) {
+        newTail.setNext(null)
+      }
+      if (nodeRemoval === this.#head) {
+        this.#head = null
+      }
+      return nodeRemoval
+    }
+    return null
+  }
+
+  removeByValue() {
+
+  }
 }

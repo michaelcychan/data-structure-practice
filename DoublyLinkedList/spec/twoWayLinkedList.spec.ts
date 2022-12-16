@@ -81,4 +81,72 @@ describe('TwoWayLinkedList', () => {
       expect(myList.getTail()!.getValue()).toBe(95)
     })
   })
+  describe('removeHead', () => {
+    it('returns null if attempting to remove from an empty list', () => {
+      const myList = new TwoWayLinkedList();
+      const removed = myList.removeHead();
+
+      expect(removed).toBe(null)
+      expect(myList.length()).toBe(0)
+    })
+    it('returns original head node if attempting to remove from a list with one node', () => {
+      const myList = new TwoWayLinkedList(55);
+      const removed = myList.removeHead();
+
+      expect(removed!.getValue()).toBe(55)
+      expect(myList.length()).toBe(0)
+      expect(myList.getHead()).toBe(null)
+      expect(myList.getTail()).toBe(null)
+    })
+    it('returns original head node if attempting to remove from a list with multiple', () => {
+      const myList = new TwoWayLinkedList(55);
+      myList.addTail(66)
+      myList.addTail(73)
+      myList.addTail(86)
+      myList.addTail(95)
+
+      const removed = myList.removeHead();
+
+      expect(removed!.getValue()).toBe(55)
+      expect(myList.length()).toBe(4)
+      expect(myList.getHead()!.getValue()).toBe(66)
+      expect(myList.getHead()!.getPrev()).toBe(null)
+      expect(myList.getTail()!.getValue()).toBe(95)
+      expect(myList.stringify()).toBe("66-73-86-95")
+    })
+  })
+  describe('removeTail', () => {
+    it('returns null if attempting to remove from an empty list', () => {
+      const myList = new TwoWayLinkedList();
+      const removed = myList.removeTail();
+
+      expect(removed).toBe(null)
+      expect(myList.length()).toBe(0)
+    })
+    it('returns original head node if attempting to remove from a list with one node', () => {
+      const myList = new TwoWayLinkedList(55);
+      const removed = myList.removeTail();
+
+      expect(removed!.getValue()).toBe(55)
+      expect(myList.length()).toBe(0)
+      expect(myList.getHead()).toBe(null)
+      expect(myList.getTail()).toBe(null)
+    })
+    it('returns original head node if attempting to remove from a list with multiple', () => {
+      const myList = new TwoWayLinkedList(55);
+      myList.addTail(66)
+      myList.addTail(73)
+      myList.addTail(86)
+      myList.addTail(95)
+
+      const removed = myList.removeTail();
+
+      expect(removed!.getValue()).toBe(95)
+      expect(myList.length()).toBe(4)
+      expect(myList.getHead()!.getValue()).toBe(55)
+      expect(myList.getTail()!.getValue()).toBe(86)
+      expect(myList.getTail()!.getNext()).toBe(null)
+      expect(myList.stringify()).toBe("55-66-73-86")
+    })
+  })
 })
