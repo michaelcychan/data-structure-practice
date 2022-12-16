@@ -108,7 +108,31 @@ export class TwoWayLinkedList {
     return null
   }
 
-  removeByValue() {
+  removeByValue(value:number):NodeType {
+    let currentNode = this.#head;
+    while (currentNode) {
+      if (currentNode.getValue() == value) {
+        break
+      }
+      currentNode = currentNode.getNext()
+    }
+    if (currentNode) {
+      if (currentNode === this.#head) {
+        this.removeHead()
+      } else if (currentNode === this.#tail) {
+        this.removeTail()
+      } else {
+        const prevNode = currentNode.getPrev()
+        const nextNode = currentNode.getNext()
 
+        if (prevNode) {
+          prevNode.setNext(nextNode)
+        }
+        if (nextNode) {
+          nextNode.setPrev(prevNode)
+        }
+      }
+    }
+    return currentNode
   }
 }
