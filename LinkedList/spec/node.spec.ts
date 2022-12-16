@@ -20,13 +20,7 @@ describe('MyNumberNode', () => {
     const node3 = new MyNumberNode(3, node21);
 
     expect(node3.getNext()).toBe(node21)
-    const after3 = node3.getNext()
-    if (after3 != null) {
-      expect(after3.getNext()).toBe(node42)
-    } else {
-      expect(after3).toBeTruthy()
-    }
-    
+    expect(node3.getNext()!.getNext()).toBe(node42)
     expect(node42.getNext()).toBe(null)
   })
   it('set new value', () => {
@@ -40,14 +34,8 @@ describe('MyNumberNode', () => {
     const node3 = new MyNumberNode(3, node21);
 
     expect(node3.getNext()).toBe(node21)
-    const after3 = node3.getNext()
-    if (after3 != null) {
-      expect(after3.getNext()).toBe(node42)
-    } else {
-      expect(after3).toBeTruthy()
-    }
+    expect(node3.getNext()!.getNext()).toBe(node42)
     expect(node42.getNext()).toBe(null)
-
     node3.setNext(node42);
     expect(node3.getNext()).toBe(node42)
   })
