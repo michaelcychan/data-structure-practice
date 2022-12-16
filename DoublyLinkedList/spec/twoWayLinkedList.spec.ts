@@ -22,9 +22,17 @@ describe('TwoWayLinkedList', () => {
       const myList = new TwoWayLinkedList();
       expect(myList.length()).toBe(0)
     })
-    it('returns 0 for empty list', () => {
+    it('returns 1 for a list with single element', () => {
       const myList = new TwoWayLinkedList(72);
       expect(myList.length()).toBe(1)
+    })
+    it('returns the number of nodes for a list with multiple nodes', () => {
+      const myList = new TwoWayLinkedList(72);
+      myList.addHead(37)
+      myList.addHead(24)
+      myList.addHead(15)
+      myList.addHead(2)
+      expect(myList.length()).toBe(5)
     })
   })
   describe('stringify', () => {
@@ -60,7 +68,9 @@ describe('TwoWayLinkedList', () => {
       myList.addHead(5)
       expect(myList.stringify()).toBe("5-67")
       expect(myList.getHead()!.getValue()).toBe(5)
+      expect(myList.getHead()!.getPrev()).toBe(null)
       expect(myList.getTail()!.getValue()).toBe(67)
+      expect(myList.getTail()!.getPrev()!.getValue()).toBe(5)
     })
   })
   describe('addTail', () => {
@@ -78,7 +88,9 @@ describe('TwoWayLinkedList', () => {
       myList.addTail(95)
       expect(myList.stringify()).toBe("34-95")
       expect(myList.getHead()!.getValue()).toBe(34)
+      expect(myList.getHead()!.getNext()!.getValue()).toBe(95)
       expect(myList.getTail()!.getValue()).toBe(95)
+      expect(myList.getTail()!.getNext()).toBe(null)
     })
   })
   describe('removeHead', () => {
