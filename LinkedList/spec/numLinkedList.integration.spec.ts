@@ -34,7 +34,8 @@ describe('MyNumberLinkedList', () => {
       myList.addNewHead(4)
       expect(myList.stringifyList()).toBe("4-17-32-55")
 
-      myList.removeNode(4)
+      const removed = myList.removeNode(4)
+      expect(removed!.getValue()).toBe(4)
       expect(myList.stringifyList()).toBe("17-32-55")
     })
     it('removes an existing target node (second node)', () => {
@@ -44,7 +45,8 @@ describe('MyNumberLinkedList', () => {
       myList.addNewHead(4)
       expect(myList.stringifyList()).toBe("4-17-32-55")
 
-      myList.removeNode(17)
+      const removed = myList.removeNode(17)
+      expect(removed!.getValue()).toBe(17)
       expect(myList.stringifyList()).toBe("4-32-55")
     })
     it('removes an existing target node (third node)', () => {
@@ -54,7 +56,8 @@ describe('MyNumberLinkedList', () => {
       myList.addNewHead(4)
       expect(myList.stringifyList()).toBe("4-17-32-55")
 
-      myList.removeNode(32)
+      const removed = myList.removeNode(32)
+      expect(removed!.getValue()).toBe(32)
       expect(myList.stringifyList()).toBe("4-17-55")
     })
     it('removes an existing target node (last node)', () => {
@@ -64,14 +67,16 @@ describe('MyNumberLinkedList', () => {
       myList.addNewHead(4)
       expect(myList.stringifyList()).toBe("4-17-32-55")
 
-      myList.removeNode(55)
+      const removed = myList.removeNode(55)
+      expect(removed!.getValue()).toBe(55)
       expect(myList.stringifyList()).toBe("4-17-32")
     })
     it('removes the only node in a list', () => {
       const myList = new MyNumLinkedList(55)
       expect(myList.stringifyList()).toBe("55")
 
-      myList.removeNode(55)
+      const removed = myList.removeNode(55)
+      expect(removed!.getValue()).toBe(55)
       expect(myList.stringifyList()).toBe("")
     })
     it('removes an non-existing node', () => {
@@ -82,7 +87,8 @@ describe('MyNumberLinkedList', () => {
       expect(myList.stringifyList()).toBe("4-17-32-55")
 
       jest.spyOn(global.console, 'error')
-      myList.removeNode(1)
+      const removed = myList.removeNode(1)
+      expect(removed).toBe(null)
       expect(console.error).toBeCalled()
       expect(myList.stringifyList()).toBe("4-17-32-55")
     })
@@ -91,7 +97,8 @@ describe('MyNumberLinkedList', () => {
       expect(myList.stringifyList()).toBe("")
 
       jest.spyOn(global.console, 'error')
-      myList.removeNode(1)
+      const removed = myList.removeNode(1)
+      expect(removed).toBe(null)
       expect(console.error).toBeCalled()
       expect(myList.stringifyList()).toBe("")
     })

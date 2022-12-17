@@ -59,10 +59,11 @@ export class MyNumLinkedList {
     if (current) {
       if (current.getValue() === value) {
         this.setNewHead(current.getNext())
-        return
+        return current
       }
     } else {
       console.error("List is empty, nothing is removed")
+      return null
     }
     while (current) {
       const nextNode = current.getNext()
@@ -70,13 +71,14 @@ export class MyNumLinkedList {
       if (nextNode) {
         if (nextNode.getValue() === value) {
           current.setNext(nextNode.getNext())
-          break
+          return nextNode
         } else {
           current = current.getNext()
         }
+      
       } else {
         console.error(`target: ${value} not found, nothing was removed`)
-        break
+        return null
       }
     }
   }
