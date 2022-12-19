@@ -59,7 +59,7 @@ export class MyNumLinkedList {
     if (current) {
       if (current.getValue() === value) {
         this.setNewHead(current.getNext())
-        return current
+        return current.getValue()
       }
     } else {
       console.error("List is empty, nothing is removed")
@@ -71,7 +71,7 @@ export class MyNumLinkedList {
       if (nextNode) {
         if (nextNode.getValue() === value) {
           current.setNext(nextNode.getNext())
-          return nextNode
+          return nextNode.getValue()
         } else {
           current = current.getNext()
         }
