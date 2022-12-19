@@ -76,7 +76,7 @@ export class TwoWayLinkedList {
     return counter;
   }
 
-  removeHead():NodeType {
+  removeHead():(number | null) {
     if (this.#head) {
       const nodeRemoval = this.#head
       const newHead = this.#head.getNext()
@@ -87,12 +87,17 @@ export class TwoWayLinkedList {
       if (nodeRemoval === this.#tail) {
         this.#tail = null
       }
-      return nodeRemoval
+      if (nodeRemoval) {
+        return nodeRemoval.getValue()
+      } else {
+        return null
+      }
+      
     }
     return null
   }
 
-  removeTail():NodeType{
+  removeTail():(number | null){
     if (this.#tail) {
       const nodeRemoval = this.#tail
       const newTail = this.#tail.getPrev()
@@ -103,12 +108,17 @@ export class TwoWayLinkedList {
       if (nodeRemoval === this.#head) {
         this.#head = null
       }
-      return nodeRemoval
+      if (nodeRemoval) {
+        return nodeRemoval.getValue()
+      } else {
+        return null
+      }
+      
     }
     return null
   }
 
-  removeByValue(value:number):NodeType {
+  removeByValue(value:number):(number | null) {
     let currentNode = this.#head;
     while (currentNode) {
       if (currentNode.getValue() == value) {
@@ -133,6 +143,11 @@ export class TwoWayLinkedList {
         }
       }
     }
-    return currentNode
+    if (currentNode) {
+      return currentNode.getValue()
+    } else {
+      return null
+    }
+    
   }
 }

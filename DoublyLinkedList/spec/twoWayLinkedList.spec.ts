@@ -105,7 +105,7 @@ describe('TwoWayLinkedList', () => {
       const myList = new TwoWayLinkedList(55);
       const removed = myList.removeHead();
 
-      expect(removed!.getValue()).toBe(55)
+      expect(removed!).toBe(55)
       expect(myList.length()).toBe(0)
       expect(myList.getHead()).toBe(null)
       expect(myList.getTail()).toBe(null)
@@ -119,7 +119,7 @@ describe('TwoWayLinkedList', () => {
 
       const removed = myList.removeHead();
 
-      expect(removed!.getValue()).toBe(55)
+      expect(removed!).toBe(55)
       expect(myList.length()).toBe(4)
       expect(myList.getHead()!.getValue()).toBe(66)
       expect(myList.getHead()!.getPrev()).toBe(null)
@@ -139,7 +139,7 @@ describe('TwoWayLinkedList', () => {
       const myList = new TwoWayLinkedList(55);
       const removed = myList.removeTail();
 
-      expect(removed!.getValue()).toBe(55)
+      expect(removed!).toBe(55)
       expect(myList.length()).toBe(0)
       expect(myList.getHead()).toBe(null)
       expect(myList.getTail()).toBe(null)
@@ -153,7 +153,7 @@ describe('TwoWayLinkedList', () => {
 
       const removed = myList.removeTail();
 
-      expect(removed!.getValue()).toBe(95)
+      expect(removed!).toBe(95)
       expect(myList.length()).toBe(4)
       expect(myList.getHead()!.getValue()).toBe(55)
       expect(myList.getTail()!.getValue()).toBe(86)
@@ -173,7 +173,7 @@ describe('TwoWayLinkedList', () => {
       const myList = new TwoWayLinkedList(55);
       const removed = myList.removeByValue(55);
 
-      expect(removed!.getValue()).toBe(55)
+      expect(removed!).toBe(55)
       expect(myList.length()).toBe(0)
       expect(myList.getHead()).toBe(null)
       expect(myList.getTail()).toBe(null)
@@ -187,7 +187,7 @@ describe('TwoWayLinkedList', () => {
 
       const removed = myList.removeByValue(55);
 
-      expect(removed!.getValue()).toBe(55)
+      expect(removed!).toBe(55)
       expect(myList.length()).toBe(4)
       expect(myList.getHead()!.getValue()).toBe(66)
       expect(myList.getHead()!.getPrev()).toBe(null)
@@ -203,7 +203,7 @@ describe('TwoWayLinkedList', () => {
 
       const removed = myList.removeByValue(95);
 
-      expect(removed!.getValue()).toBe(95)
+      expect(removed!).toBe(95)
       expect(myList.length()).toBe(4)
       expect(myList.getHead()!.getValue()).toBe(55)
       expect(myList.getHead()!.getPrev()).toBe(null)
@@ -219,7 +219,7 @@ describe('TwoWayLinkedList', () => {
 
       const removed = myList.removeByValue(73);
 
-      expect(removed!.getValue()).toBe(73)
+      expect(removed!).toBe(73)
       expect(myList.length()).toBe(4)
       expect(myList.getHead()!.getValue()).toBe(55)
       expect(myList.getHead()!.getPrev()).toBe(null)
