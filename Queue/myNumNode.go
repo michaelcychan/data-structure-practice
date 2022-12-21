@@ -9,6 +9,14 @@ func (n *MyNode) GetValue() int {
 	return n.value
 }
 
-func (n *MyNode) GetNextNode() *MyNode {
+func (n *MyNode) GetNext() *MyNode {
 	return n.nextNode
+}
+
+func (n *MyNode) SetNext(nextNode MyNode) {
+	n.nextNode = &nextNode
+}
+
+func (n *MyNode) RemoveNext() {
+	n.nextNode = nil
 }
