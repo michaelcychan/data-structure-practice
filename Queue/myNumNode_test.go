@@ -1,4 +1,4 @@
-package myNode
+package Queue
 
 import (
 	"testing"
@@ -12,6 +12,23 @@ func TestMyNodes(t *testing.T) {
 		actuaNextNode := testNode.GetNext()
 
 		expectedValue := 10
+		var expectedNextNode *MyNode = nil
+
+		if actualValue != expectedValue {
+			t.Errorf("Value: expected %d, but got %d", expectedValue, actualValue)
+		}
+
+		if actuaNextNode != expectedNextNode {
+			t.Errorf("Next Node: expected %v, but got %v", &expectedNextNode, &actuaNextNode)
+		}
+	})
+	t.Run("initialises with no input", func(t *testing.T) {
+		testNode := MyNode{}
+
+		actualValue := testNode.GetValue()
+		actuaNextNode := testNode.GetNext()
+
+		expectedValue := 0
 		var expectedNextNode *MyNode = nil
 
 		if actualValue != expectedValue {
