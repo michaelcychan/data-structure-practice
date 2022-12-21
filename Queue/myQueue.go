@@ -22,7 +22,6 @@ func (q *MyQueue) Peek() (n int, err error) {
 	} else {
 		return -1, errors.New("the queue is empty")
 	}
-
 }
 
 func (q *MyQueue) Enqueue(value int) error {
@@ -38,4 +37,25 @@ func (q *MyQueue) Enqueue(value int) error {
 	} else {
 		return errors.New("max capacity reached, cannot enqueue new data")
 	}
+}
+
+func (q *MyQueue) Dequeue() (int, error) {
+	if q.size == 0 {
+		return -1, errors.New("the queue is empty, dequeue will cause stack underflow")
+	}
+	if q.head.nextNode == nil {
+		removed := q.head
+		q.head = nil
+		q.size -= 1
+		return removed.GetValue(), nil
+	} else {
+		removed := q.head
+		q.head = q.head.nextNode
+		q.size -= 1
+		return removed.GetValue(), nil
+	}
+}
+
+func (q *MyQueue) GetWholeList() string {
+	return ""
 }
