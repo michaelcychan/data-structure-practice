@@ -1,4 +1,4 @@
-package Queue
+package MyNode
 
 import (
 	"testing"

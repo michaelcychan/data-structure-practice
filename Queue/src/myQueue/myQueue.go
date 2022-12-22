@@ -1,9 +1,12 @@
 package Queue
 
-import "errors"
+import (
+	"Queue/src/MyNode"
+	"errors"
+)
 
 type MyQueue struct {
-	head *MyNode
+	head *MyNode.MyNode
 	cap  int
 	size int
 }
@@ -18,7 +21,7 @@ func (q *MyQueue) CurrentSize() int {
 
 func (q *MyQueue) Peek() (n int, err error) {
 	if q.head != nil {
-		return q.head.value, nil
+		return q.head.GetValue(), nil
 	} else {
 		return -1, errors.New("the queue is empty")
 	}
@@ -26,7 +29,8 @@ func (q *MyQueue) Peek() (n int, err error) {
 
 func (q *MyQueue) Enqueue(value int) error {
 	if q.cap > q.size {
-		newNode := MyNode{value: value}
+		newNode := MyNode.MyNode{}
+		newNode.SetValue(value)
 		if q.head != nil {
 			q.head.SetNext(newNode)
 		} else {
@@ -44,14 +48,14 @@ func (q *MyQueue) Dequeue() (int, error) {
 	if q.size == 0 {
 		return -1, errors.New("the queue is empty, dequeue will cause stack underflow")
 	}
-	if q.head.nextNode == nil {
+	if q.head.GetNext() == nil {
 		removed := q.head
 		q.head = nil
 		q.size -= 1
 		return removed.GetValue(), nil
 	} else {
 		removed := q.head
-		q.head = q.head.nextNode
+		q.head = q.head.GetNext()
 		q.size -= 1
 		return removed.GetValue(), nil
 	}

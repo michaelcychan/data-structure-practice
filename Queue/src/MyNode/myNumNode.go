@@ -1,4 +1,4 @@
-package Queue
+package MyNode
 
 type MyNode struct {
 	value    int
@@ -7,6 +7,10 @@ type MyNode struct {
 
 func (n *MyNode) GetValue() int {
 	return n.value
+}
+
+func (n *MyNode) SetValue(value int) {
+	n.value = value
 }
 
 func (n *MyNode) GetNext() *MyNode {
