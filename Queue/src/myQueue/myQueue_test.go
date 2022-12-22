@@ -122,7 +122,8 @@ func TestQueue(t *testing.T) {
 	})
 	t.Run("Enqueue when cap is reached", func(t *testing.T) {
 		queue := MyQueue{cap: 1}
-		queue.Enqueue(1)
+		errFirstEnqueue := queue.Enqueue(1)
+		assertNoError(t, errFirstEnqueue)
 		errCapReached := queue.Enqueue(2)
 		assertError(t, errCapReached)
 	})
