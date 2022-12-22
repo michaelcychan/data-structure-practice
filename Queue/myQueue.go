@@ -28,9 +28,10 @@ func (q *MyQueue) Enqueue(value int) error {
 	if q.cap > q.size {
 		newNode := MyNode{value: value}
 		if q.head != nil {
-			newNode.SetNext(*q.head)
+			q.head.SetNext(newNode)
+		} else {
+			q.head = &newNode
 		}
-		q.head = &newNode
 		q.size += 1
 
 		return nil

@@ -53,8 +53,8 @@ func TestQueue(t *testing.T) {
 		queue := MyQueue{cap: 5}
 
 		expectedTop := 3
-		queue.Enqueue(17)
-		errEnqueue := queue.Enqueue(expectedTop)
+		queue.Enqueue(expectedTop)
+		errEnqueue := queue.Enqueue(17)
 
 		assertNoError(t, errEnqueue)
 
@@ -95,8 +95,8 @@ func TestQueue(t *testing.T) {
 		expectedTop := 3
 		expectedBottom := 17
 
-		queue.Enqueue(expectedBottom)
 		queue.Enqueue(expectedTop)
+		queue.Enqueue(expectedBottom)
 
 		actualRemoved, errDequeue := queue.Dequeue()
 
