@@ -39,6 +39,25 @@ func TestMyNodes(t *testing.T) {
 			t.Errorf("Next Node: expected %v, but got %v", &expectedNextNode, &actuaNextNode)
 		}
 	})
+	t.Run("initialises with no input and set Value", func(t *testing.T) {
+		testNode := MyNode{}
+		expectedValue := 5
+
+		testNode.SetValue(expectedValue)
+
+		actualValue := testNode.GetValue()
+		actuaNextNode := testNode.GetNext()
+
+		var expectedNextNode *MyNode = nil
+
+		if actualValue != expectedValue {
+			t.Errorf("Value: expected %d, but got %d", expectedValue, actualValue)
+		}
+
+		if actuaNextNode != expectedNextNode {
+			t.Errorf("Next Node: expected %v, but got %v", &expectedNextNode, &actuaNextNode)
+		}
+	})
 	t.Run("linking two nodes", func(t *testing.T) {
 		node1 := MyNode{value: 3}
 		node2 := MyNode{value: 13}

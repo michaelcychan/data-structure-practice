@@ -120,6 +120,25 @@ func TestQueue(t *testing.T) {
 			t.Errorf("expected %d to remain in queue, but got %d", expectedBottom, finalTop)
 		}
 	})
+	t.Run("Enqueue when cap is reached", func(t *testing.T) {
+		queue := MyQueue{cap: 1}
+		queue.Enqueue(1)
+		errCapReached := queue.Enqueue(2)
+		assertError(t, errCapReached)
+	})
+	t.Run("Dequeue an empty list", func(t *testing.T) {
+		queue := MyQueue{cap: 1}
+		value := 1
+		queue.Enqueue(value)
+		valDequeue, errFirstDequeue := queue.Dequeue()
+
+		assertNoError(t, errFirstDequeue)
+		if valDequeue != value {
+			t.Errorf("expected %d, but got %d", value, valDequeue)
+		}
+		_, errUnderflow := queue.Dequeue()
+		assertError(t, errUnderflow)
+	})
 }
 
 func assertNoError(t testing.TB, err error) {
