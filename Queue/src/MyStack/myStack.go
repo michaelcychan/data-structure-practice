@@ -19,7 +19,7 @@ func (s *MyStack) Peek() (n int, err error) {
 	}
 }
 
-func (s *MyStack) Add(value int) error {
+func (s *MyStack) Push(value int) error {
 	if s.size < s.cap {
 		newNode := MyNode.MyNode{}
 		newNode.SetValue(value)
@@ -36,7 +36,7 @@ func (s *MyStack) Add(value int) error {
 	}
 }
 
-func (s *MyStack) RemoveTop() (topValue int, err error) {
+func (s *MyStack) Pop() (topValue int, err error) {
 	if s.size == 0 {
 		return -1, errors.New("stack underflow")
 	} else {

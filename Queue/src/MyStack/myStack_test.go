@@ -11,13 +11,13 @@ func TestMyStack(t *testing.T) {
 			t.Fatalf("Expected an error, but got none")
 		}
 	})
-	t.Run("adds one data", func(t *testing.T) {
+	t.Run("Pushes one data", func(t *testing.T) {
 		stack := MyStack{cap: 5}
 		expectedTop := 6
-		errAdd := stack.Add(expectedTop)
+		errPush := stack.Push(expectedTop)
 
-		if errAdd != nil {
-			t.Fatalf("expected no error, but got one: %v", errAdd)
+		if errPush != nil {
+			t.Fatalf("expected no error, but got one: %v", errPush)
 		}
 
 		topValue, err := stack.Peek()
@@ -29,15 +29,15 @@ func TestMyStack(t *testing.T) {
 			t.Errorf("expected %d, but got %d", expectedTop, topValue)
 		}
 	})
-	t.Run("adds two data and Peek show the top", func(t *testing.T) {
+	t.Run("Pushes two data and Peek show the top", func(t *testing.T) {
 		stack := MyStack{cap: 5}
 
-		stack.Add(20)
+		stack.Push(20)
 		expectedTop := 6
-		errAdd := stack.Add(expectedTop)
+		errPush := stack.Push(expectedTop)
 
-		if errAdd != nil {
-			t.Fatalf("expected no error, but got one: %v", errAdd)
+		if errPush != nil {
+			t.Fatalf("expected no error, but got one: %v", errPush)
 		}
 
 		topValue, err := stack.Peek()
@@ -52,14 +52,14 @@ func TestMyStack(t *testing.T) {
 	t.Run("throws error if stack overflow", func(t *testing.T) {
 		stack := MyStack{cap: 3}
 
-		stack.Add(54)
-		stack.Add(20)
+		stack.Push(54)
+		stack.Push(20)
 		expectedTop := 6
-		stack.Add(expectedTop)
+		stack.Push(expectedTop)
 
-		errAdd := stack.Add(2)
+		errPush := stack.Push(2)
 
-		if errAdd == nil {
+		if errPush == nil {
 			t.Fatalf("expected an error, but got none")
 		}
 
@@ -72,21 +72,21 @@ func TestMyStack(t *testing.T) {
 			t.Errorf("expected %d, but got %d", expectedTop, topValue)
 		}
 	})
-	t.Run("removeTop from empty stack warns of underflow", func(t *testing.T) {
+	t.Run("Pop from empty stack warns of underflow", func(t *testing.T) {
 		stack := MyStack{cap: 5}
 
-		_, errUnderflow := stack.RemoveTop()
+		_, errUnderflow := stack.Pop()
 
 		if errUnderflow == nil {
 			t.Fatalf("Expected an error, but got none")
 		}
 	})
-	t.Run("removeTop from a stack with one data", func(t *testing.T) {
+	t.Run("Pop from a stack with one data", func(t *testing.T) {
 		stack := MyStack{cap: 5}
 		expectedTop := 6
-		stack.Add(expectedTop)
+		stack.Push(expectedTop)
 
-		oldTop, err := stack.RemoveTop()
+		oldTop, err := stack.Pop()
 
 		if err != nil {
 			t.Fatalf("expected no error, but got one %v", err)
@@ -96,14 +96,14 @@ func TestMyStack(t *testing.T) {
 			t.Errorf("expected %d, but got %d", expectedTop, oldTop)
 		}
 	})
-	t.Run("removeTop from a stack with two data", func(t *testing.T) {
+	t.Run("Pop from a stack with two data", func(t *testing.T) {
 		stack := MyStack{cap: 5}
 		expectedTop := 6
 		bigBase := 100
-		stack.Add(bigBase)
-		stack.Add(expectedTop)
+		stack.Push(bigBase)
+		stack.Push(expectedTop)
 
-		oldTop, err := stack.RemoveTop()
+		oldTop, err := stack.Pop()
 
 		if err != nil {
 			t.Fatalf("expected no error, but got one %v", err)
@@ -126,18 +126,18 @@ func TestMyStack(t *testing.T) {
 		stack := MyStack{cap: 5}
 		expectedTop := 6
 		bigBase := 100
-		stack.Add(240)
+		stack.Push(240)
 
-		stack.Add(73)
+		stack.Push(73)
 
-		stack.RemoveTop()
-		stack.RemoveTop()
-		stack.Add(bigBase)
-		stack.Add(90)
-		stack.RemoveTop()
-		stack.Add(expectedTop)
+		stack.Pop()
+		stack.Pop()
+		stack.Push(bigBase)
+		stack.Push(90)
+		stack.Pop()
+		stack.Push(expectedTop)
 
-		oldTop, err := stack.RemoveTop()
+		oldTop, err := stack.Pop()
 
 		if err != nil {
 			t.Fatalf("expected no error, but got one %v", err)
