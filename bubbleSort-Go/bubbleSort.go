@@ -2,7 +2,7 @@ package MySort
 
 import "fmt"
 
-func bubbleSort(inputSlice []int) []int {
+func BubbleSort(inputSlice []int) []int {
 	var counter int = 0
 	for j := 0; j < len(inputSlice); j++ {
 		for i := 0; i < len(inputSlice)-j-1; i++ {

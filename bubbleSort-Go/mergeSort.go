@@ -1,13 +1,13 @@
 package MySort
 
-func mergeSort(inputSlice []int) []int {
+func MergeSort(inputSlice []int) []int {
 	if len(inputSlice) <= 1 {
 		return inputSlice
 	} else {
 		middleIndex := len(inputSlice) / 2
 		leftSlice := inputSlice[:middleIndex]
 		rightSlice := inputSlice[middleIndex:]
-		return merge(mergeSort(leftSlice), mergeSort(rightSlice))
+		return merge(MergeSort(leftSlice), MergeSort(rightSlice))
 	}
 }
 
