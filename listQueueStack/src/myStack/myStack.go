@@ -1,8 +1,9 @@
 package MyStack
 
 import (
-	"QueueStack/src/MyNode"
 	"errors"
+
+	MyNode "github.com/michaelcychan/data-structure-practice/listQueueStack/src/MyNode"
 )
 
 type MyStack struct {
