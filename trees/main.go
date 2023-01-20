@@ -1,7 +1,7 @@
 package main
 
 import (
-	TreeNode "github.com/michaelcychan/data-structure-practice/trees/src"
+	TreeNode "github.com/michaelcychan/data-structure-practice/trees/treenode"
 )
 
 func main() {
