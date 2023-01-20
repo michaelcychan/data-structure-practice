@@ -1,13 +1,18 @@
 package TreeNode
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
 
 type TreeNode struct {
-	value    int
-	children []TreeNode
+	value int
+
+	// children should saves the pointers,
+	// so it shows the original copy,
+	// not just a shadow copy
+	children []*TreeNode
 }
 
 type NodeLevel struct {
@@ -19,22 +24,34 @@ func (t *TreeNode) GetValue() int {
 	return t.value
 }
 
-func (t *TreeNode) AddChild(child TreeNode) {
+func (t *TreeNode) SetValue(value int) {
+	t.value = value
+}
+
+func (t *TreeNode) AddChild(child *TreeNode) {
 	t.children = append(t.children, child)
 }
 
+func CreateTreeNode(value int) TreeNode {
+	return TreeNode{value: value}
+}
+
 func PrintTree(t TreeNode) {
+	fmt.Println("Printing the tree")
 	stack := []NodeLevel{{t, 0}}
 
 	// collecting strings
 	var sb strings.Builder
 	sb.WriteString("\n")
 
+	var node NodeLevel
+	var level int
+
 	for len(stack) > 0 {
 		currentLength := len(stack)
-		node := stack[currentLength-1]
-		level := node.level
-		stack = stack[0 : currentLength-1]
+		node = stack[0]
+		level = node.level
+		stack = stack[1:currentLength]
 
 		// write the level indicators
 		if level > 0 {
@@ -51,8 +68,8 @@ func PrintTree(t TreeNode) {
 		level++
 
 		for _, child := range node.node.children {
-			stack = append(stack, NodeLevel{child, level})
-
+			stack = append([]NodeLevel{{*child, level}}, stack...)
 		}
 	}
+	fmt.Println(sb.String())
 }
