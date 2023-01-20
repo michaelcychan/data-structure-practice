@@ -1,8 +1,9 @@
 package Queue
 
 import (
-	"Queue/src/MyNode"
 	"errors"
+
+	MyNode "github.com/michaelcychan/data-structure-practice/listQueueStack/src/MyNode"
 )
 
 type MyQueue struct {

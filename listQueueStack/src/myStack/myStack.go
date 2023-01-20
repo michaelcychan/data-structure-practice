@@ -1,7 +1,7 @@
 package MyStack
 
 import (
-	"Queue/src/MyNode"
+	"QueueStack/src/MyNode"
 	"errors"
 )
 
