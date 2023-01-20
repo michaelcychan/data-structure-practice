@@ -1,6 +1,10 @@
 package main
 
+import (
+	TreeNode "./src/"
+)
+
 func main() {
-	newTreeNode := TreeNode{value: 100}
+	newTreeNode := TreeNode.TreeNode{value: 100}
 
 }

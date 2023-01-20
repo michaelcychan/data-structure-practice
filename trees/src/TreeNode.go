@@ -3,14 +3,11 @@ package TreeNode
 import (
 	"strconv"
 	"strings"
-
-	MyQueue "github.com/michaelcychan/data-structure-practice/listQueueStack/src/myQueue"
 )
 
 type TreeNode struct {
 	value    int
 	children []TreeNode
-	queue    MyQueue.MyQueue
 }
 
 type NodeLevel struct {
