@@ -1,6 +1,7 @@
 package TreeNode
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -72,4 +73,43 @@ func PrintTree(t TreeNode) {
 		}
 	}
 	fmt.Println(sb.String())
+}
+
+// BreadthFirstSearch will search target from most parent node, level to level.
+// so the bottom level will be searched last
+func BreadthFirstSearch(tree *TreeNode, target int) ([]TreeNode, error) {
+	frontier := [][]TreeNode{}
+	initPath := [][]TreeNode{{*tree}}
+
+	frontier = append(initPath, frontier...)
+
+	for len(frontier) > 0 {
+		//pop the last, slice shortened.
+		currentPath := frontier[len(frontier)-1]
+		frontier = frontier[0 : len(frontier)-1]
+
+		currentNode := currentPath[len(currentPath)-1]
+		fmt.Printf("Searching node with value: %d \n", currentNode.value)
+
+		if currentNode.value == target {
+			return currentPath, nil
+		}
+
+		// current node not target,
+		// adding the children nodes to frontier path.
+		for _, child := range currentNode.children {
+			newPath := make([]TreeNode, len(currentPath))
+
+			// for copy function, new slice as first argument,
+			// original slice as second argument
+			copy(newPath, currentPath)
+			newPath = append(newPath, *child)
+
+			// new children are added at front,
+			// as those at the back of slice will be popped,
+			// these new children will be searched LATER than this level
+			frontier = append([][]TreeNode{newPath}, frontier...)
+		}
+	}
+	return nil, errors.New("not found")
 }
