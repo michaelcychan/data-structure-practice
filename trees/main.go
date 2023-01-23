@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	TreeNode "github.com/michaelcychan/data-structure-practice/trees/treenode"
 )
 
@@ -34,10 +32,4 @@ func main() {
 
 	TreeNode.PrintTree(newTreeNode)
 
-	searchResult, err := TreeNode.BreadthFirstSearch(&newTreeNode, 300)
-	if err != nil {
-		fmt.Println("got an error: ", err)
-	} else {
-		fmt.Println(searchResult)
-	}
 }

@@ -113,3 +113,7 @@ func BreadthFirstSearch(tree *TreeNode, target int) ([]TreeNode, error) {
 	}
 	return nil, errors.New("not found")
 }
+
+func DepthFirstSearch(root *TreeNode, target int) ([]TreeNode, error) {
+	return []TreeNode{}, errors.New("nothing found")
+}
