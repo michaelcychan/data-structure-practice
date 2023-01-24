@@ -116,12 +116,12 @@ func TestDepthFirstSearch(t *testing.T) {
 
 	cases := []struct {
 		target       int
-		expectedPath []TreeNode
+		expectedPath []*TreeNode
 	}{
-		{100, []TreeNode{root}},
-		// {80, []TreeNode{root, child1}},
-		// {240, []TreeNode{root, child2, grandchild3}},
-		// {1050, []TreeNode{root, child2, grandchild3, greatgrandchild1}},
+		{100, []*TreeNode{&root}},
+		{80, []*TreeNode{&root, &child1}},
+		{240, []*TreeNode{&root, &child2, &grandchild3}},
+		// {1050, []*TreeNode{&root, &child2, &grandchild3, &greatgrandchild1}},
 	}
 
 	for _, c := range cases {

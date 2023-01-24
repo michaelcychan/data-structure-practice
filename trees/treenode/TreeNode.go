@@ -21,6 +21,10 @@ type NodeLevel struct {
 	level int
 }
 
+func (t *TreeNode) GetChildren() []*TreeNode {
+	return t.children
+}
+
 func (t *TreeNode) GetValue() int {
 	return t.value
 }
@@ -114,6 +118,34 @@ func BreadthFirstSearch(tree *TreeNode, target int) ([]TreeNode, error) {
 	return nil, errors.New("not found")
 }
 
-func DepthFirstSearch(root *TreeNode, target int) ([]TreeNode, error) {
-	return []TreeNode{}, errors.New("nothing found")
+func DepthFirstSearch(root *TreeNode, target int) ([]*TreeNode, error) {
+	fmt.Println("finding ", target)
+	resultPath := Dfs(root, target, []*TreeNode{})
+	if resultPath == nil {
+		return nil, errors.New("target not found")
+	} else {
+		return resultPath, nil
+	}
+}
+
+func Dfs(root *TreeNode, target int, path []*TreeNode) []*TreeNode {
+
+	fmt.Println("at node: ", root.value)
+	path = append(path, root)
+
+	if root.value == target {
+		return path
+	}
+
+	for _, child := range root.children {
+		// this error is taken up by _
+		// because it only means target does not appear in this tree
+		pathFound := Dfs(child, target, path)
+
+		if len(pathFound) > 0 {
+			return pathFound
+		}
+	}
+
+	return nil
 }
