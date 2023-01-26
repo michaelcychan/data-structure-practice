@@ -61,6 +61,23 @@ func TestBinaryTree(t *testing.T) {
 
 		assertValue(t, grandchild, grandChildValue)
 	})
+	t.Run("inserts an existing number would not create new node", func(t *testing.T) {
+		treeroot := CreateBinaryTreeNode(100)
+		newNumber := 120
+
+		treeroot.Insert(newNumber)
+		treeroot.Insert(newNumber)
+
+		gotValue := treeroot.GetRight().GetValue()
+		shouldBeNilRight := treeroot.GetRight().GetRight()
+		shouldBeNilLeft := treeroot.GetRight().GetLeft()
+
+		assertValue(t, newNumber, gotValue)
+
+		if shouldBeNilLeft != nil || shouldBeNilRight != nil {
+			t.Errorf("a duplicate node should not be added, but it was created %v, %v", shouldBeNilLeft, shouldBeNilRight)
+		}
+	})
 	t.Run("searches a number to return path", func(t *testing.T) {
 		treeroot := CreateBinaryTreeNode(100)
 		child := 120
@@ -100,8 +117,61 @@ func TestBinaryTree(t *testing.T) {
 		if err == nil {
 			t.Fatalf("expected an error, but got none")
 		}
-
 	})
+	t.Run("InOrderTraversal returns a string of InOrder", func(t *testing.T) {
+		treeroot := CreateBinaryTreeNode(100)
+
+		treeroot.Insert(120)
+		treeroot.Insert(80)
+		treeroot.Insert(40)
+		treeroot.Insert(90)
+		treeroot.Insert(115)
+		treeroot.Insert(150)
+		treeroot.Insert(200)
+
+		expectedTraversal := "40 80 90 100 115 120 150 200"
+		got := InOrderTraversal(treeroot)
+
+		if expectedTraversal != got {
+			t.Errorf("expected traversal to be %s, but got %s", expectedTraversal, got)
+		}
+	})
+	// t.Run("GetInOrderSuccessor returns the smallest value on right branch", func(t *testing.T) {
+	// 	treeroot := CreateBinaryTreeNode(100)
+	// 	child := 120
+	// 	grandchild := 150
+
+	// 	treeroot.Insert(child)
+	// 	treeroot.Insert(80)
+	// 	treeroot.Insert(115)
+	// 	treeroot.Insert(grandchild)
+	// 	treeroot.Insert(200)
+
+	// 	inOrderSuccessor := treeroot.GetInOrderSuccessor()
+
+	// 	if inOrderSuccessor != 80 {
+	// 		t.Errorf("expected inOrderSuccessor to be %d, but got %d", 30, inOrderSuccessor.value)
+	// 	}
+	// })
+	// t.Run("removes a node with no child", func(t *testing.T) {
+	// 	treeroot := CreateBinaryTreeNode(99)
+	// 	child := 120
+	// 	grandchild := 150
+
+	// 	treeroot.Insert(child)
+	// 	treeroot.Insert(80)
+	// 	treeroot.Insert(115)
+	// 	treeroot.Insert(grandchild)
+	// 	treeroot.Insert(200)
+
+	// 	treeroot.Delete(200)
+
+	// 	_, err := treeroot.LookFor(200)
+
+	// 	if err == nil {
+	// 		t.Fatalf("expected an error, but got none")
+	// 	}
+	// })
 }
 
 func assertValue(t testing.TB, expectedValue, actualValue int) {

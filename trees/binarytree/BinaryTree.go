@@ -2,6 +2,9 @@ package BinaryTree
 
 import (
 	"errors"
+	"fmt"
+	"strconv"
+	"strings"
 )
 
 type BinaryTree struct {
@@ -34,13 +37,15 @@ func (bt *BinaryTree) Insert(value int) {
 		} else {
 			bt.right.Insert(value)
 		}
-	} else {
+	} else if value < bt.value {
 		if bt.left == nil {
 			newNode := CreateBinaryTreeNode(value)
 			bt.left = newNode
 		} else {
-			bt.right.Insert(value)
+			bt.left.Insert(value)
 		}
+	} else {
+		fmt.Println(fmt.Errorf("%d already existed", value))
 	}
 }
 
@@ -75,3 +80,48 @@ func (bt *BinaryTree) LookFor(target int) ([]*BinaryTree, error) {
 	}
 	return path, nil
 }
+
+func InOrderTraversal(bt *BinaryTree) string {
+	if bt == nil {
+		return ""
+	}
+	traversalStack := []*BinaryTree{}
+	note := []string{}
+	curr := bt
+	for {
+		if curr != nil {
+			traversalStack = append(traversalStack, curr)
+			curr = curr.left
+		} else if len(traversalStack) > 0 {
+			popped := traversalStack[len(traversalStack)-1]
+			traversalStack = traversalStack[:len(traversalStack)-1]
+			poppedValue := popped.value
+			note = append(note, strconv.Itoa(poppedValue))
+			curr = popped.right
+		} else {
+			break
+		}
+	}
+
+	return strings.Join(note, " ")
+
+}
+
+// func (bt *BinaryTree) GetInOrderSuccessor() *BinaryTree {
+// 	if bt == nil {
+// 		return nil
+// 	}
+// 	return nil
+// }
+
+// func (bt *BinaryTree) Delete(target int) {
+// 	var parent, curr *BinaryTree
+// 	if bt == nil {
+// 		return
+// 	}
+// 	if target > bt.value {
+// 		bt.right.Delete(target)
+// 	} else if target < bt.value {
+// 		bt.left.Delete(target)
+// 	}
+// }
